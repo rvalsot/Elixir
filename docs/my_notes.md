@@ -1,53 +1,137 @@
 # Elixir
 
-Personal notes to refer when I'm programming in Elixir.
 
-## Data
+## Terminal
+
+__Interactive Elixir__
+
+Accessed via `iex` in Terminal.
+
+* `iex > i something` will return information about the item.
+
+__Script Running__
+
+You can run scripts in terminal via:
+``` bash
+$ elixir file_name.exs
+```
+
+## Types
+
+__Basic Types__
+
+| Type          | Example     | Notes |
+| ------------- | ----------- | ----- |
+| Integer       | `1911`      | Notations for binary, octal & hex are supported        |
+| Float         | `92.4`      | Require dot in declaration `1.x`; `e` number supported |
+| Boolean       | `true`      | Booleans `true` and `false` are atoms.                 |
+| Atom / Symbol | `:atom`     | They're constants whose name is their value.           |
+| String        | `Hedgehog`  | Are UTF-8 coded, they're placed between double quotes. |
+| List          | `[1,2,3]`   | May contain any value
+| Tuple         | `{1,2,3}`   |
+
+Other notes:
+* _Floats_ in Elixir are `64bit` double precision.
+* Type check can be done with functions: `is_binary/1`, `is_boolean/1`, `is_float/1`, `is_integer/1`, `is_number/1`.
+* _Strings_ are, internally, binaries. Single-quoted are char lists.
+* _Lists_ are {container, pointer} groups, while _tuples_ are an unified chunk of memory.
 
 __Lists__
+
+Can be added or subtracted using operato `++/2` and `--/2`.
+* List support pattern matching.
+
+__Tuples__
+
+* Check element in position n: `elem(tuple, n)`
+* Check tuple size: `tuple_size(tuple)`
+* Place element in a given index n: `put_elem/3`, this will return a new tuple, because immutability.
+* Tuples support pattern matching
+
+
+__Processes Types__
+
+`Port`, `Reference`, `PID`.
+
+__Assignment__
+
+Pattern Matching assignment can occur with tuples or lists:
+
 ``` elixir
-[]
+# On tuples, a = 1, b = 2, c = 3
+{a, b, c} = {1, 2, 3}
+
+# On lists, r = red, g = green, b = blue
+[r, g, b] = [red, green, blue]
 ```
 
-## Modules
+Pin operator assignment `^`
+Underscore assignment `_` is used in case of non important values. You can never read from an underscore value.
 
-Code in Elixir is organized in different modules of code. They are collections of methods and functions.
+## Operators
 
-Module definition:
+__Booleans__
+
+* Logic operators `and`, `or`, `not` expect booleans in their use.
+* `or` and `and` are short circuit operators that will execute right side only if the left side is not enough to determine result.
+* `||`, `&&`, and `!` operators will accept any argument. They will evaluate to true all values except `false` and `nil`.
+
+[__Comparison__](hexdocs.pm/elixir/master/operators.html)
+
+| Operator    | Description |
+| ----------- | ----------- |
+| `==`        | Equal to... |
+| `!=`        | Not equal to... |
+| `===`       | Equal to..., differentiates integers and floats     |
+| `!===`      | Not equal to..., differentiates integers and floats |
+| `<=`, `>=`  | Lesser or Equal than..., Greater or Equal than...   |
+| `<`, `>`    | Lesser than..., Greater than...                     |
+
+Sorting between different data types should consider:
+> `number < atom < reference < function < port < pid < tuple < map < list < bitstring`
+
+__Lists__
+
 ``` elixir
-defmodule Module_name do
-  def method_name do
-    "do something"
-  end
-end
+# Concatenation
+[1,2,3,4] ++ [5,6]
+
+# Removal
+[1,2,3] -- [2]
 ```
 
-### Methods
+__Number__
 
-They have implicit returns.
+| Operation | Operator | Notes |
+| --------- | -------- | ----- |
+| Addition  | `+`      |
+| Subtraction | `-` |
+| Multiplication | `*` |
+| Division | `/` | For integer division: use `div/2` |
+| Modulus  | | For integer modulus use `rem/2` |
 
-## Elixir Console
+__Strings__
 
-## Mix
-
-Mix:
-* Creates Projects
-* Compiles Projects
-* Run 'Tasks'
-* Manages Dependencies
-
-``` shell
-# Create a new project
-$ mix new project_name
-
-# Running project to iex
-project_folder$ iex -S mix
-# After this, we can call project with iex
-iex()> Module.member
+``` elixir
+# Concatenation
+"vaquita" <> " " <> "pinta"
 ```
 
+## Functions
 
+Are identified by their name and arity (number of arguments taken). They can be checked with `is_function/1`, and their arity with `is_function/2`.
 
-## Glossary
+__Anonymous Functions__
 
-## Sources
+Dot operator `.` makes a distinction when calling anonymous functions.
+They are scope-aware.
+
+## Control Flow
+
+__Case__
+
+If none of the cases is matched, an error will rise.
+
+## Bro-tips:
+
+* `size` references are for constant time operations, while `length` for linear-time ones.

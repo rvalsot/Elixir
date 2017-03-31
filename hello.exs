@@ -1,1 +1,1 @@
-IO.puts "Hello from an Elixir code!"
+IO.puts("Hello from an Elixir code!")

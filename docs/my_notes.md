@@ -8,6 +8,13 @@ __Interactive Elixir__
 Accessed via `iex` in Terminal.
 
 * `iex > i something` will return information about the item.
+* `iex > h` provides a group of helper functions. About a specific function, use `iex > h(func/1)` to get a description; module-level documentation is accessed via `iex > h(Module)` & `iex > h(Module.func/1)`.
+
+You can use `iex` to:
+
+* Compile / execute projects
+* Log into remote machines
+* Access already running Elixir applications.
 
 __Script Running__
 
@@ -15,6 +22,12 @@ You can run scripts in terminal via:
 ``` bash
 $ elixir file_name.exs
 ```
+
+Files with `.ex` extension are intended to be compiled to byte code, while `.exs` are more for scripting languages (interpreted at source).
+
+__Compilation__
+
+* `iex > c "file_name.exs"` help us compile and returns `[]` with return value and modules listed.
 
 ## Types
 
@@ -38,7 +51,7 @@ Other notes:
 
 __Lists__
 
-Can be added or subtracted using operato `++/2` and `--/2`.
+Can be added or subtracted using operator `++/2` and `--/2`.
 * List support pattern matching.
 
 __Tuples__
@@ -53,7 +66,16 @@ __Processes Types__
 
 `Port`, `Reference`, `PID`.
 
-__Assignment__
+__Matching__
+
+Instead of simple assignment, if possible, left and right sided of the operator `=` will be bounded. i.e.:
+
+``` bash  
+iex > a = 1
+iex > 1 = a
+iex > 2 = a
+** Match error
+```
 
 Pattern Matching assignment can occur with tuples or lists:
 
@@ -66,7 +88,8 @@ Pattern Matching assignment can occur with tuples or lists:
 ```
 
 Pin operator assignment `^`
-Underscore assignment `_` is used in case of non important values. You can never read from an underscore value.
+
+* Underscore assignment `_` is used in case of non important values. You can never read from an underscore value.
 
 ## Operators
 

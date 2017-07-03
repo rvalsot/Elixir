@@ -195,16 +195,93 @@ def func_name(arguments), do:(
 )
 ```
 
+You can define several clauses for multiple inputs with same arity, giving them different bodies. The order of definitions, is important, from top-down: simpler-to-complex. The multiple implementations should also be written together.
+
+__Guard clauses__
+
+They help us distinguishing between types or tests. They're used with the `when` keyword. (check `guard.exs` in this folder.)
+
+Guard clauses are limited to built-in operators, type-check functions, and some extra functions (page 49).
+
+__Default parameters__
+
+For a function are passed with syntax `parameter \\ value`:
+``` elixir
+def function_name(parameter \\ value) do
+  does_something
+end
+```
+And are present at any invoking of the function.
+
+__Function's Scope__
+
+Private functions are defined with the `defp` keyword instead of `def`, you can have multiple heads, but all need to be either public or private.
+
+__Pipe Operator__
+
+This one links the previous function result as the argument to the following:
+
+``` elixir
+last_result = initial_process
+  |> medium_process(extra_argument)
+  |> last_process
+```
+
+Calling: `val |> func(a,b)` for extra arguments, is like `func(val, a, b)`.
+
+#### Modules
+
+They provide the namespaces for things defined by programmer: functions, macros, structures, protocols and other modules.
+
+__Directives__ for modules are lexically scoped: beginning when it's encountered and ending with its enclosing scope end. They are:
+
+* __Alias__: creates an alias for a Module, to shorten typing:
+``` elixir
+defmodule ModuleName do
+  def func_name do
+    alias ModuleName, as: AliasName
+    do_something
+  end
+end
+```
+* __Import__: brings a module's functions/macros into the current scope. Its syntax goes: `import Module_name [, only: | except: ]`, specific imports should go with name and arity: `import List, only: [flatten: 1, duplicate: 2]`. You can combo the only with `:function` or `:macros` atoms to bring just those parts.
+* __Require__: if you want to use macros defined in given module. Loads the module before code and use any macros in it.
+
+__Attributes__
+
+Are associated metadata to the modules, they can be defined using: `@attribute_name value` syntax. This works only at top level of the modules. They can be redefined in the same module, functions will take their last version.
+
+Use them only for configuration and/or metadata, not as constants.
+
+#### Erlang Libraries
+
+You can access to any Erlang-written library, just need to remember their special properties.
+
+## Chapter 7.- Lists and Recursion
+
+> Contains:
+> 1. Recursive structure of lists
+> 2. Traversing and building lists
+> 3. Accumulators
+> 4. Implementing map and reduce
 
 
 
 
-## Todos;
 
-* 35: exercise: functions-1
-* 37: exercise: functions-2, 3
-* 39: exercise: functions-4
-* 45: exercise: Modules and functions -1, 2, 3
+
+
+
+
+## Todos:
+
+* 35: functions-1
+* 37: functions-2, 3
+* 39: functions-4
+* 45: Modules and functions-1, 2, 3
+* 47: Modules and functions-4, 5
+* 52: Modules and functions-6
+* 59: Modules and functions-7
 
 `[head | tail]`
 

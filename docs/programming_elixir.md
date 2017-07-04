@@ -265,11 +265,63 @@ You can access to any Erlang-written library, just need to remember their specia
 > 3. Accumulators
 > 4. Implementing map and reduce
 
+Lists are composed with the `list = [head | tail]` scheme, inside braces, comma separated. They can be decomposed in a succession of head|tail. Several individual patterns can be the head.
 
+Protip: every list is terminated by an empty list:
 
+Function recursion over list is a proper way to apply the same function to all of list's members. The blueprint of this mapping function is:
 
+``` elixir
+def mapper([], _func) do
+  []
+end
+def mapper([head | tail], func) do
+  [func.(head) | mapper(tail, func)]
+end
 
+# Variation with state keeper: (sum sample)
+defmodule ModuleName do
+  def mapper(list) do
+    _mapper(list, initial_state)
+  end
 
+  defp _mapper([], state_keeper) do
+    state_keeper
+  end
+  defp _mapper([head | tail], state_keeper) do
+    mapper(tail, head + state_keeper)
+  end
+end
+
+# Proposed reducer by author:
+defmodule ModuleName do
+  def reduce([], value, _) do
+    value
+  end
+  def reduce([head | tail], value, func) do
+    reduce(tail, func.(head, value), func)
+  end
+end
+```
+
+The state keeper variation is quite tricky, that's why we call the private function to do heavy lifting.
+
+We need to pass an initial value, the function that takes current value or reduction & next element of the collection, returning the next value of the reduction.
+
+As empty list arguments are passed as: `[]`, single element list ones are denoted with: `[_]`.
+
+__Lists of lists__
+
+(incomplete)
+
+## Chapter 8.- Dictionaries, Maps, HashDicts, Keywords, Sets, and Structs
+
+> Contains:
+> 1. 2 1/2 dictionary data types
+> 2. General Dictionary API
+> 3. Pattern matching and map updating
+> 4. Structs
+> 5. Nested data structures
 
 
 
@@ -282,10 +334,6 @@ You can access to any Erlang-written library, just need to remember their specia
 * 47: Modules and functions-4, 5
 * 52: Modules and functions-6
 * 59: Modules and functions-7
-
-`[head | tail]`
-
-List are created with brackets, with coma separation:
-``` elixir
-list = [1, 2, 3]
-```
+* 68: Lists and recursion-0
+* 69: Lists and recursion-1, 2, 3
+* 72: Lists and recursion-4

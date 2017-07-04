@@ -323,6 +323,23 @@ __Lists of lists__
 > 4. Structs
 > 5. Nested data structures
 
+__Choosing best dictionary__
+
+* `Keyword` module helps us for more than one entry per key, ensuring ordered elements.
+* `map` will help for pattern matching against contents.
+* `HashDict` at BEAM will help to work with a lot of entries. (As of Elixir 1.4, they're deprecated)
+
+Keyword lists allows for duplicated keys, but they need to be accessed via `Keyword` module. If not, just firs appearance will be returned.
+
+Pattern matches are the most common operations for maps, via key or value identity.
+
+Maps do not allow you to bind a value to a key during pattern matching.
+
+
+
+
+
+
 
 
 ## Todos:

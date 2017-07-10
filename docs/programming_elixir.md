@@ -335,11 +335,28 @@ Pattern matches are the most common operations for maps, via key or value identi
 
 Maps do not allow you to bind a value to a key during pattern matching.
 
+Map updating can be done with the form: `new_map = %{old_map | key => value, ...}`. To add a new key, you need to use the `Dict.put_new/3` function.
 
+__Struct__
 
+Structs are mappish modules, with keys limited to atoms and without `Dict` or `Access.` They're named given its map type.
 
+`defstruct` sets map's characteristics. Syntax is the same as maps, and access is through dot notation.
 
+You can associate methods to the struct within its module.
 
+They're also useful for polymorphism.
+
+Access protocol can be added with `@derive Access` directive on the module.
+
+__Nested Dictionaries__
+
+Keys can have nested dictionaries associated with them.
+
+``` elixir
+put_in(1,2)
+update_in
+```
 
 
 ## Todos:

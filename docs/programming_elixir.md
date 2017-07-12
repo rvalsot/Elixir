@@ -354,9 +354,56 @@ __Nested Dictionaries__
 Keys can have nested dictionaries associated with them.
 
 ``` elixir
-put_in(1,2)
-update_in
+put_in/2
+update_in/3
 ```
+
+| Command | Macro | Function |
+|---------|-------|----------|
+| `get_in` | no | (dict, keys) |
+| `put_in` | (path, value) | (dict, keys, value) |
+| `update_in` | (path, func)| (dict, keys, func) |
+| `get_and_update_in` | (path, func) | (dict, keys, func) |
+
+__Sets__
+As of Elixir 1.4, `HashSet` are deprecated, use `MapSet` instead.
+
+## Chapter 10.- Processing Collections - Enum and Stream
+
+> Contains:
+> 1. Enum & Stream modules
+> 2. Collectable protocol
+> 3. Comprehensions
+
+Collections all share: you can iterate through them, and you can add stuff to some.
+
+`Enum` module is the workhorse of collections. `Stream` performs lazy operations: next value is calculated only when needed.
+
+__Enum__
+
+Some tasks that can be done include: iterate, filter, combine, split, convert, concatenate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Todos:

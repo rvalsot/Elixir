@@ -383,6 +383,9 @@ __Enum__
 
 Some tasks that can be done include: iterate, filter, combine, split, convert, concatenate.
 
+Enum is heavy on resources, because each call is self contained and returns a collection.]
+
+__Stream__
 
 
 
@@ -418,3 +421,4 @@ Some tasks that can be done include: iterate, filter, combine, split, convert, c
 * 68: Lists and recursion-0
 * 69: Lists and recursion-1, 2, 3
 * 72: Lists and recursion-4
+* 92: Lists and recursion-5, 6

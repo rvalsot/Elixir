@@ -383,12 +383,11 @@ __Enum__
 
 Some tasks that can be done include: iterate, filter, combine, split, convert, concatenate.
 
-Enum is heavy on resources, because each call is self contained and returns a collection.]
+Enum is heavy on resources, because each call is self contained and returns a collection.
 
 __Stream__
 
-
-
+They are lazy versions of Enum, that get concerned with the current value, instead of returning the whole collection.
 
 
 

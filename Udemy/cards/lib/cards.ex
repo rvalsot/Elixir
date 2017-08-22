@@ -1,50 +1,77 @@
 defmodule Cards do
+  @moduledoc """
+    Cards module provides methods for creating and handling a deck of cards.
 
-  # Checks if a card exists in a deck
-  def contains?(deck, card) do
-    Enum.member?(deck, card)
+  """
+
+
+  def hello do
+    "Welcome to Cards module"
   end
 
-  # Creates a new deck
+  @doc """
+    Returns a list of strings representing a deck of playing cards.
+  """
   def create_deck do
-    values = ["♟", "♞", "♝", "♛", "♚", "A"]
-    suits  = ["♠", "♥", "♦", "♣"]
+    valores = [1, 2, 3, 4, 5, 6, 7, "Caballero", "Obispo", "Rey"]
+    palos = ["Espadas", "Copas", "Oros", "Bastos"]
 
-    for suit <- suits, value <- values do
-        "#{value} of #{suit}"
+    for valor <- valores, palo <- palos do
+        "#{valor} de #{palo}"
     end
-
   end
 
-  def create_hand(hand_size) do
-    Cards.create_deck
-    |> Cards.shuffle
-    |> Cards.deal(hand_size)
-  end
+  @doc """
+  ## Examples
 
-  # Creates a hand  for the user
-  def deal(deck, hand_size) do
+      iex> deck = Cards.create_deck()
+      iex> {hand, _deck} = Cards.deal(deck, 1)
+      iex> hand
+      ["1 de Espadas"]
+
+
+  """
+  def deal(deck, hand_size \\ 5) do
     Enum.split(deck, hand_size)
   end
 
-  # Loads a file with content, parses readable to string
-  def load(filename) do
-    case File.read(filename) do
-      {:ok, binary} -> :erlang.binary_to_term(binary)
-      {:error, _reason} -> "Error found, check for reasons"
-    end
-
+  def shuffle_deck (deck) do
+    Enum.shuffle(deck)
   end
 
+  def contains?(deck, hand) do
+    Enum.member?(deck, hand)
+  end
+
+  @doc """
+    `save` function stores the deck into a
+  """
   def save(deck, filename) do
     binary = :erlang.term_to_binary(deck)
     File.write(filename, binary)
   end
 
-  # Shuffles a deck
-  def shuffle(deck) do
-    Enum.shuffle(deck)
+  def load_deck(filename) do
+    # {status, binary} = File.read(filename)
+    # case status do
+    #   :ok ->
+    #     :erlang.binary_to_term(binary)
+    #   :error ->
+    #     "Error while loading file, does it exists?"
+    # end
+
+    case File.read(filename) do
+      {:ok, binary} ->
+        :erlang.binary_to_term(binary)
+      {:error, reason} ->
+        "Error while loading file: #{reason}"
+    end
   end
 
+  def create_hand(hand_size) do
+    Cards.create_deck()
+    |> Cards.shuffle_deck()
+    |> Cards.deal(hand_size)
+  end
 
 end

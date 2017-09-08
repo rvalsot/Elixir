@@ -381,7 +381,7 @@ Collections all share: you can iterate through them, and you can add stuff to so
 
 __Enum__
 
-Some tasks that can be done include: iterate, filter, combine, split, convert, concatenate.
+Some tasks that can be done include: iterate, filter, combine, split, convert, concatenate, create, select.
 
 Enum is heavy on resources, because each call is self contained and returns a collection.
 

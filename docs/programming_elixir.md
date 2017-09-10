@@ -389,9 +389,22 @@ __Stream__
 
 They are lazy versions of Enum, that get concerned with the current value, instead of returning the whole collection.
 
+Streams are composable.
 
+Default streams include:
+* `cycle`: takes an enumerable and returns an infinite stream containing its elements.
+* `repeatedly`: takes a function and invokes it each time a new value is wanted.
+* `iterate`: generates an infinite stream with a `start_value`, next followed by applying a function to the previous.
+* `unfold`: you supply an initial value and a function, which uses the argument to create a two-values-tuple: `{iteration_return, value_to_be_passed_next}`, if the function returns `nil`, stream ends; otherwise: `fn state -> {stream_value, new_state} end`.
+* `resource`: like `unfold`, with some changes: instead of initial value, takes a function; there's a closing of the resource; thirdly it takes the final value and does stuff needed to deallocate the resource.
 
+Consider streams when you can/need to defer processing until having/needing the data, and when a large number of things is need to be dealt with.
 
+__Collectable Protocol__
+
+This protocol allows you to build a collection by inserting elements into it. Not all collection are collectable.
+
+Comprehensions in Elixir: given one or more collections, extract all combinations of values from each, sometimes filter them, and them generate a new collection.
 
 
 

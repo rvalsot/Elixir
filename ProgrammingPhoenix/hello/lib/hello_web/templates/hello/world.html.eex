@@ -1,0 +1,2 @@
+<h1> Hello Folks!</h1>
+<p> Hi! <%=String.capitalize(@name) %>, be welcomed</p>
